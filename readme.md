@@ -1,4 +1,4 @@
-Funtion convert() takes int and converts it to roman numerals up to 1,000. 
+Function convert() takes int and converts it to roman numerals up to 1,000. 
 
 I = 1
 V = 5
