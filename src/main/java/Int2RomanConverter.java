@@ -24,27 +24,28 @@ public class Int2RomanConverter {
         int numberToTransform = numberToConvert;
 
         for (int i = listOfNumeralValues.size() - 1; i >= 0; i--) {
-            int currentNumeral = listOfNumeralValues.get(i);
+            int currentNumeralValue = listOfNumeralValues.get(i);
+            String currentNumeralString = mapOfNumerals.get(currentNumeralValue);
 
-            if (numberToTransform_isARomanNumerals(numberToTransform, currentNumeral)) {
-                result.append(mapOfNumerals.get(currentNumeral));
-                numberToTransform -= currentNumeral;
+            if (numberToTransform_isARomanNumerals(numberToTransform, currentNumeralValue)) {
+                result.append(currentNumeralString);
+                numberToTransform -= currentNumeralValue;
 
                 if (numberToTransform > 0) { continue; }  else break;
             }
 
-            if (numberToTransformMinusOne_isARomanNumerals(numberToTransform, currentNumeral)) {
-                result.append("I").append(mapOfNumerals.get(currentNumeral));
-                numberToTransform -= currentNumeral;
+            if (numberToTransformMinusOne_isARomanNumerals(numberToTransform, currentNumeralValue)) {
+                result.append("I").append(currentNumeralString);
+                numberToTransform -= currentNumeralValue;
                 continue;
             }
 
-            if (numberToTransform/ currentNumeral >= 1) {
-                int numberOfRepetitionsOfNumeral = numberToTransform/ currentNumeral;
+            if (numberToTransform/ currentNumeralValue >= 1) {
+                int numberOfRepetitionsOfNumeral = numberToTransform/ currentNumeralValue;
                 for (int repetitions = 0 ; repetitions < numberOfRepetitionsOfNumeral ; repetitions++ ) {
-                    result.append(mapOfNumerals.get(currentNumeral));
+                    result.append(currentNumeralString);
                 }
-                numberToTransform-= currentNumeral;
+                numberToTransform-= currentNumeralValue;
             }
         }
 
