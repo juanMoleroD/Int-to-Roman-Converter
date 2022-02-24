@@ -1,13 +1,12 @@
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Int2RomanConverter {
 
-    private final List<Integer> numeralValuesList = List.of(1,5,10,50,100,500,1000);
+    private final List<Integer> listOfNumeralValues = List.of(1,5,10,50,100,500,1000);
 
-    private final HashMap<Integer, String> numeralReferences =
+    private final HashMap<Integer, String> mapOfNumerals =
             new HashMap<Integer, String>(Map.of(
                     1, "I",
                     5,"V",
@@ -20,39 +19,43 @@ public class Int2RomanConverter {
 
     public String convert(int numberToConvert) {
 
-        StringBuilder romanNumber = new StringBuilder();
+        StringBuilder result = new StringBuilder();
 
-        for (int i = numeralValuesList.size() - 1, operatorNumber = numberToConvert; i >= 0; i--) {
-            if (isNumberInNumerals(operatorNumber, numeralValuesList.get(i))) {
-                romanNumber.append(numeralReferences.get(numeralValuesList.get(i)));
-                operatorNumber -= numeralValuesList.get(i);
+        int numberToTransform = numberToConvert;
 
-                if (operatorNumber > 0) { continue; }  else break;
+        for (int i = listOfNumeralValues.size() - 1; i >= 0; i--) {
+            int currentNumeral = listOfNumeralValues.get(i);
+
+            if (numberToTransform_isARomanNumerals(numberToTransform, currentNumeral)) {
+                result.append(mapOfNumerals.get(currentNumeral));
+                numberToTransform -= currentNumeral;
+
+                if (numberToTransform > 0) { continue; }  else break;
             }
 
-            if (isNumberMinusOneInNumerals(operatorNumber, numeralValuesList.get(i))) {
-                romanNumber.append("I").append(numeralReferences.get(numeralValuesList.get(i)));
-                operatorNumber -= numeralValuesList.get(i);
+            if (numberToTransformMinusOne_isARomanNumerals(numberToTransform, currentNumeral)) {
+                result.append("I").append(mapOfNumerals.get(currentNumeral));
+                numberToTransform -= currentNumeral;
                 continue;
             }
 
-            if (operatorNumber/numeralValuesList.get(i) >= 1) {
-                int roundedInt = operatorNumber/numeralValuesList.get(i);
-                for (int repetitions = 0 ; repetitions < roundedInt ; repetitions++ ) {
-                    romanNumber.append(numeralReferences.get(numeralValuesList.get(i)));
+            if (numberToTransform/ currentNumeral >= 1) {
+                int numberOfRepetitionsOfNumeral = numberToTransform/ currentNumeral;
+                for (int repetitions = 0 ; repetitions < numberOfRepetitionsOfNumeral ; repetitions++ ) {
+                    result.append(mapOfNumerals.get(currentNumeral));
                 }
-                operatorNumber-= numeralValuesList.get(i);
+                numberToTransform-= currentNumeral;
             }
         }
 
-        return romanNumber.toString();
+        return result.toString();
     }
 
-    private boolean isNumberMinusOneInNumerals(int number, int numberToCompareTo) {
+    private boolean numberToTransformMinusOne_isARomanNumerals(int number, int numberToCompareTo) {
         return (number + 1) == numberToCompareTo;
     }
 
-    private boolean isNumberInNumerals(int number, int numberToCompareTo) {
+    private boolean numberToTransform_isARomanNumerals(int number, int numberToCompareTo) {
         return number == numberToCompareTo;
     }
 
