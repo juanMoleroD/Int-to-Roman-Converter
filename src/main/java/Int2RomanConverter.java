@@ -2,19 +2,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Map.entry;
+
 public class Int2RomanConverter {
 
-    private final List<Integer> listOfNumeralValues = List.of(1,5,10,50,100,500,1000);
+    private final List<Integer> listOfNumeralValues = List.of(1,4,5,9,10,40,50,90,100,400,500,900,1000);
 
     private final HashMap<Integer, String> mapOfNumerals =
-            new HashMap<Integer, String>(Map.of(
-                    1, "I",
-                    5,"V",
-                    10, "X",
-                    50, "L",
-                    100, "C",
-                    500, "D",
-                    1000, "M"
+            new HashMap<Integer, String>(Map.ofEntries(
+                    entry(1, "I"),
+                    entry(4,"IV"),
+                    entry(5,"V"),
+                    entry(9,"IX"),
+                    entry(10, "X"),
+                    entry(40, "XL"),
+                    entry(50, "L"),
+                    entry(90, "XC"),
+                    entry(100, "C"),
+                    entry(400, "CD"),
+                    entry(500, "D"),
+                    entry(900, "CM"),
+                    entry(1000, "M")
     ));
 
     public String convert(int numberToConvert) {
