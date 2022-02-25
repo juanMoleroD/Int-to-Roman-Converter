@@ -23,8 +23,8 @@ public class Int2RomanConverter {
 
         int numberToTransform = numberToConvert;
 
-        for (int i = listOfNumeralValues.size() - 1; i >= 0; i--) {
-            int currentNumeralValue = listOfNumeralValues.get(i);
+        for (int positionOnList = listOfNumeralValues.size() - 1; positionOnList >= 0; positionOnList--) {
+            int currentNumeralValue = listOfNumeralValues.get(positionOnList);
             String currentNumeralString = mapOfNumerals.get(currentNumeralValue);
 
             if (numberToTransform_isARomanNumerals(numberToTransform, currentNumeralValue)) {
