@@ -9,7 +9,7 @@ public class Int2RomanConverter {
     private final List<Integer> listOfNumeralValues = List.of(1,4,5,9,10,40,50,90,100,400,500,900,1000);
 
     private final HashMap<Integer, String> mapOfNumerals =
-            new HashMap<Integer, String>(Map.ofEntries(
+            new HashMap<>(Map.ofEntries(
                     entry(1, "I"),
                     entry(4,"IV"),
                     entry(5,"V"),
@@ -26,26 +26,18 @@ public class Int2RomanConverter {
     ));
 
     public String convert(int numberToConvert) {
-
         StringBuilder result = new StringBuilder();
-
         int numberToTransform = numberToConvert;
 
-        for (int positionOnList = listOfNumeralValues.size() - 1; positionOnList >= 0; positionOnList--) {
+        for (int positionOnList = (listOfNumeralValues.size() - 1); positionOnList >= 0; positionOnList--) {
             int currentNumeralValue = listOfNumeralValues.get(positionOnList);
             String currentNumeralString = mapOfNumerals.get(currentNumeralValue);
 
-            if (numberToTransform_isARomanNumerals(numberToTransform, currentNumeralValue)) {
+            if (numberToTransform == currentNumeralValue) {
                 result.append(currentNumeralString);
                 numberToTransform -= currentNumeralValue;
 
-                if (numberToTransform > 0) { continue; }  else break;
-            }
-
-            if (numberToTransformMinusOne_isARomanNumerals(numberToTransform, currentNumeralValue)) {
-                result.append("I").append(currentNumeralString);
-                numberToTransform -= currentNumeralValue;
-                continue;
+                if (numberToTransform > 0) { continue; }  else { break; }
             }
 
             if (numberToTransform/ currentNumeralValue >= 1) {
@@ -53,19 +45,11 @@ public class Int2RomanConverter {
                 for (int repetitions = 0 ; repetitions < numberOfRepetitionsOfNumeral ; repetitions++ ) {
                     result.append(currentNumeralString);
                 }
-                numberToTransform-= currentNumeralValue;
+                numberToTransform-= (currentNumeralValue * numberOfRepetitionsOfNumeral);
             }
         }
 
         return result.toString();
-    }
-
-    private boolean numberToTransformMinusOne_isARomanNumerals(int number, int numberToCompareTo) {
-        return (number + 1) == numberToCompareTo;
-    }
-
-    private boolean numberToTransform_isARomanNumerals(int number, int numberToCompareTo) {
-        return number == numberToCompareTo;
     }
 
 }

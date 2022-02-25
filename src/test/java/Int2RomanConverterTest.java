@@ -63,6 +63,7 @@ class Int2RomanConverterTest {
     @Test
     void converts_higherLevelFoursAndNines() {
         assertEquals("CMXCI",converter.convert(991));
+        assertEquals("CDXLIV",converter.convert(444));
     }
 
 
