@@ -10,15 +10,21 @@ class Int2RomanConverterTest {
     void converts_numbersOnNumerals() {
         assertEquals("I", converter.convert(1));
         assertEquals("V", converter.convert(5));
+        assertEquals("X", converter.convert(10));
+        assertEquals("L", converter.convert(50));
+        assertEquals("C", converter.convert(100));
+        assertEquals("D", converter.convert(500));
+        assertEquals("M", converter.convert(1000));
+
     }
 
     @Test
     void converts_numeralsMinus1() {
-        //assertEquals("IV", converter.convert(4));
+        assertEquals("IV", converter.convert(4));
         assertEquals("IX", converter.convert(9));
-        assertEquals("IL", converter.convert(49));
-        assertEquals("IC", converter.convert(99));
-        assertEquals("ID", converter.convert(499));
+        assertEquals("XLIX", converter.convert(49));
+        assertEquals("XCIX", converter.convert(99));
+        assertEquals("CDXCIX", converter.convert(499));
 
     }
 
@@ -45,7 +51,7 @@ class Int2RomanConverterTest {
         assertEquals("DV", converter.convert(505));
     }
 
-/*    @Test
+    @Test
     void converts_complexNumerals() {
         assertEquals("DCCXXVII", converter.convert(727));
         assertEquals("LXXXVIII", converter.convert(88));
@@ -57,7 +63,7 @@ class Int2RomanConverterTest {
     @Test
     void converts_higherLevelFoursAndNines() {
         assertEquals("CMXCI",converter.convert(991));
-    }*/
+    }
 
 
 
